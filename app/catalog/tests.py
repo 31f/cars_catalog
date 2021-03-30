@@ -9,7 +9,7 @@ class APITestCase(TestCase):
     client_class = APIClient
 
 
-class MakeAPITest(APITestCase):
+class FullAPITest(APITestCase):
     def setUp(self):
         super().setUp()
         self.make = Make.objects.create(id='acura', name='Acura', active=True)
@@ -22,8 +22,8 @@ class MakeAPITest(APITestCase):
     def test_makes_list(self):
         resp = self.client.get('/api/makes/')
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(resp.data), 1)
-        make = resp.data[0]
+        self.assertEqual(len(resp.data['results']), 1)
+        make = resp.data['results'][0]
         self.assertEqual(make['id'], self.make.id)
         self.assertEqual(make['name'], self.make.name)
         self.assertEqual(make['active'], self.make.active)
@@ -31,8 +31,8 @@ class MakeAPITest(APITestCase):
     def test_models_list(self):
         resp = self.client.get('/api/models/')
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(resp.data), 1)
-        model = resp.data[0]
+        self.assertEqual(len(resp.data['results']), 1)
+        model = resp.data['results'][0]
         self.assertEqual(model['id'], self.model.id)
         self.assertEqual(model['name'], self.model.name)
         self.assertEqual(model['active'], self.model.active)
@@ -41,8 +41,8 @@ class MakeAPITest(APITestCase):
     def test_submodels_list(self):
         resp = self.client.get('/api/submodels/')
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(resp.data), 1)
-        submodel = resp.data[0]
+        self.assertEqual(len(resp.data['results']), 1)
+        submodel = resp.data['results'][0]
         self.assertEqual(submodel['id'], self.submodel.id)
         self.assertEqual(submodel['name'], self.submodel.name)
         self.assertEqual(submodel['active'], self.submodel.active)
@@ -52,8 +52,8 @@ class MakeAPITest(APITestCase):
     def test_cars_list(self):
         resp = self.client.get('/api/cars/')
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(resp.data), 1)
-        car = resp.data[0]
+        self.assertEqual(len(resp.data['results']), 1)
+        car = resp.data['results'][0]
         self.assertEqual(car['id'], str(self.car.id))
         self.assertEqual(car['year'], self.car.year)
         self.assertEqual(car['mileage'], self.car.mileage)
