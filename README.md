@@ -1,4 +1,4 @@
-**Cars Catalog Application**
+**Cars Catalog API**
 
 Python 3.8 / Django 3.1.7
 
