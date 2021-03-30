@@ -21,14 +21,14 @@ At browser go to http://127.0.0.1:8000/
 
 **API endpoints**:
 
-`/makes` - car makes list
+`api/makes` - car makes list
 
-`/models` - car models list
+`api/models` - car models list
 
-`/submodels` - car submodels list
+`api/submodels` - car submodels list
 
-`/cars` - cars list. 
+`api/cars` - cars list. 
 
 Filters: price_more, price_less, name, mileage_more, mileage_less 
 
-`/cars/{car_id}` - one car details
+`api/cars/{car_id}` - one car details
