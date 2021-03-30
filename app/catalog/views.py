@@ -26,12 +26,10 @@ class SubmodelViewSet(mixins.ListModelMixin,
 
 
 class CarsFilter(FilterSet):
-    price_more = django_filters.CharFilter(method='price_more_filter')
-    price_less = django_filters.CharFilter(method='price_less_filter')
-
-    mileage_more = django_filters.CharFilter(method='mileage_more_filter')
-    mileage_less = django_filters.CharFilter(method='mileage_less_filter')
-
+    price_more = django_filters.NumberFilter(method='price_more_filter')
+    price_less = django_filters.NumberFilter(method='price_less_filter')
+    mileage_more = django_filters.NumberFilter(method='mileage_more_filter')
+    mileage_less = django_filters.NumberFilter(method='mileage_less_filter')
     name = django_filters.CharFilter(method='name_filter')
 
     class Meta:

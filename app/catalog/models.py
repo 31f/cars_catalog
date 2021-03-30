@@ -33,7 +33,7 @@ class Submodel(models.Model):
 
     @property
     def make(self):
-        return self.model.make.name
+        return self.model.make
 
 
 class Car(TimeStampedModel):
@@ -58,8 +58,8 @@ class Car(TimeStampedModel):
 
     @property
     def model(self):
-        return self.submodel.model.name
+        return self.submodel.model
 
     @property
     def make(self):
-        return self.submodel.model.make.name
+        return self.submodel.model.make
