@@ -1,34 +1,34 @@
-Cars Catalog Application
+**Cars Catalog Application**
 
 Python 3.8 / Django 3.1.7
 
 ---
-Run:
+**Run**:
 
-$ pip install virtualenv
+`$ pip install virtualenv`
 
-$ virtualenv myvenv
+`$ virtualenv myvenv`
 
-$ source myvenv/bin/activate
+`$ source myvenv/bin/activate`
 
-$ pip install -r requirements.txt
+`$ pip install -r requirements.txt`
 
-$ python manage.py runserver
+`$ python manage.py runserver`
 
 At browser go to http://127.0.0.1:8000/
 
 ---
 
-API endpoints:
+**API endpoints**:
 
-/makes - car makes list
+`/makes` - car makes list
 
-/models - car models list
+`/models` - car models list
 
-/submodels - car submodels list
+`/submodels` - car submodels list
 
-/cars - cars list. 
+`/cars` - cars list. 
 
-Filters: 'price_more', 'price_less', 'name', 'mileage_more', 'mileage_less' 
+Filters: price_more, price_less, name, mileage_more, mileage_less 
 
-/cars/{car_id} - one car details
+`/cars/{car_id}` - one car details
