@@ -37,7 +37,7 @@ class Submodel(models.Model):
 
 
 class Car(TimeStampedModel):
-    id = models.UUIDField(verbose_name='ID', default=uuid.uuid4(), editable=False, primary_key=True)
+    id = models.UUIDField(verbose_name='ID', default=uuid.uuid4, editable=False, primary_key=True)
     active = models.BooleanField()
     year = models.SmallIntegerField(verbose_name='Year',
                                     validators=[MinValueValidator(1900)],
