@@ -39,9 +39,9 @@ class SubmodelSerializer(serializers.ModelSerializer):
 
 
 class CarSerializer(serializers.ModelSerializer):
-    model = serializers.CharField(source='model.name')
-    make = serializers.CharField(source='make.name')
-    submodel = serializers.CharField(source='submodel.name')
+    model = serializers.CharField(source='model.name', read_only=True)
+    make = serializers.CharField(source='make.name', read_only=True)
+    submodel_name = serializers.CharField(source='submodel.name', read_only=True)
 
     class Meta:
         model = Car
@@ -51,6 +51,7 @@ class CarSerializer(serializers.ModelSerializer):
                   'mileage',
                   'price',
                   'submodel',
+                  'submodel_name',
                   'model',
                   'make',
                   'body_type',

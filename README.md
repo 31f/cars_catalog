@@ -29,6 +29,6 @@ At browser go to http://127.0.0.1:8000/
 
 `api/cars` - cars list. 
 
-Filters: price_more, price_less, name, mileage_more, mileage_less 
+Filters: `price_more`, `price_less`, `name`, `mileage_more`, `mileage_less` 
 
-`api/cars/{car_id}` - one car details
+`api/cars/{car_id}` - selected car details

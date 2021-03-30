@@ -19,7 +19,7 @@ class MakeAPITest(APITestCase):
                                       body_type='SUV', transmission='Automatic', fuel_type='Petrol',
                                       exterior_color='White')
 
-    def test_makes(self):
+    def test_makes_list(self):
         resp = self.client.get('/api/makes/')
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         self.assertEqual(len(resp.data), 1)
@@ -28,7 +28,7 @@ class MakeAPITest(APITestCase):
         self.assertEqual(make['name'], self.make.name)
         self.assertEqual(make['active'], self.make.active)
 
-    def test_models(self):
+    def test_models_list(self):
         resp = self.client.get('/api/models/')
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         self.assertEqual(len(resp.data), 1)
@@ -38,7 +38,7 @@ class MakeAPITest(APITestCase):
         self.assertEqual(model['active'], self.model.active)
         self.assertEqual(model['make'], self.model.make.name)
 
-    def test_submodels(self):
+    def test_submodels_list(self):
         resp = self.client.get('/api/submodels/')
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         self.assertEqual(len(resp.data), 1)
@@ -49,7 +49,7 @@ class MakeAPITest(APITestCase):
         self.assertEqual(submodel['model'], self.model.name)
         self.assertEqual(submodel['make'], self.model.make.name)
 
-    def test_cars(self):
+    def test_cars_list(self):
         resp = self.client.get('/api/cars/')
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         self.assertEqual(len(resp.data), 1)
@@ -60,9 +60,38 @@ class MakeAPITest(APITestCase):
         self.assertEqual(car['active'], self.car.active)
         self.assertEqual(car['model'], self.car.model.name)
         self.assertEqual(car['make'], self.car.make.name)
-        self.assertEqual(car['submodel'], self.car.submodel.name)
+        self.assertEqual(car['submodel'], self.car.submodel.id)
+        self.assertEqual(car['submodel_name'], self.car.submodel.name)
         self.assertEqual(car['price'], self.car.price)
         self.assertEqual(car['body_type'], self.car.body_type)
         self.assertEqual(car['transmission'], self.car.transmission)
         self.assertEqual(car['fuel_type'], self.car.fuel_type)
         self.assertEqual(car['exterior_color'], self.car.exterior_color)
+
+    def test_cars_add(self):
+        post_data = {
+            "active": True,
+            "year": 1960,
+            "mileage": 1500,
+            "price": 5000,
+            "submodel": self.submodel.id,
+            "body_type": "Sedan",
+            "transmission": "Manual",
+            "fuel_type": "Petrol",
+            "exterior_color": "Red"
+        }
+        resp = self.client.post('/api/cars/', data=post_data)
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+        car = resp.data
+        self.assertEqual(car['year'], post_data['year'])
+        self.assertEqual(car['mileage'], post_data['mileage'])
+        self.assertEqual(car['active'], post_data['active'])
+        self.assertEqual(car['model'], self.submodel.model.name)
+        self.assertEqual(car['make'], self.submodel.make.name)
+        self.assertEqual(car['submodel'], self.car.submodel.id)
+        self.assertEqual(car['submodel_name'], self.car.submodel.name)
+        self.assertEqual(car['price'], post_data['price'])
+        self.assertEqual(car['body_type'], post_data['body_type'])
+        self.assertEqual(car['transmission'], post_data['transmission'])
+        self.assertEqual(car['fuel_type'], post_data['fuel_type'])
+        self.assertEqual(car['exterior_color'], post_data['exterior_color'])
