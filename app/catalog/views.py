@@ -26,32 +26,32 @@ class SubmodelViewSet(mixins.ListModelMixin,
 
 
 class CarsFilter(FilterSet):
-    price_more = django_filters.DateFilter(method='price_more_filter')
-    price_lower = django_filters.DateFilter(method='price_lower_filter')
+    price_more = django_filters.CharFilter(method='price_more_filter')
+    price_less = django_filters.CharFilter(method='price_less_filter')
 
-    mileage_more = django_filters.DateFilter(method='mileage_more_filter')
-    mileage_lower = django_filters.DateFilter(method='mileage_lower_filter')
+    mileage_more = django_filters.CharFilter(method='mileage_more_filter')
+    mileage_less = django_filters.CharFilter(method='mileage_less_filter')
 
-    name = django_filters.DateFilter(method='name_filter')
+    name = django_filters.CharFilter(method='name_filter')
 
     class Meta:
         model = Car
-        fields = ['price_more', 'price_lower', 'name', 'mileage_more', 'mileage_lower']
+        fields = ['price_more', 'price_less', 'name', 'mileage_more', 'mileage_less']
 
     def price_more_filter(self, queryset, name, value):
-        return queryset.exclude(price__gte=value)
+        return queryset.filter(price__gte=value)
 
-    def price_lower_filter(self, queryset, name, value):
-        return queryset.exclude(price__lte=value)
+    def price_less_filter(self, queryset, name, value):
+        return queryset.filter(price__lte=value)
 
     def mileage_more_filter(self, queryset, name, value):
-        return queryset.exclude(mileage__gte=value)
+        return queryset.filter(mileage__gte=value)
 
-    def mileage_lower_filter(self, queryset, name, value):
-        return queryset.exclude(mileage__lte=value)
+    def mileage_less_filter(self, queryset, name, value):
+        return queryset.filter(mileage__lte=value)
 
     def name_filter(self, queryset, name, value):
-        return queryset.filter(submodel__model_name__icontains=value)
+        return queryset.filter(submodel__model__name__icontains=value)
 
 
 class CarViewSet(mixins.CreateModelMixin,
